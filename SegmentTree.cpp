@@ -5,14 +5,14 @@ using namespace std;
 //Organized by sum
 class ST {
 
-	int* st = new int[64];
+	int* st;
 	int sz;
 
 	public:
 
 	ST(int* a, int _sz) {
-		//st = new int[sz * 4];
-		sz = _sz;
+		sz = _sz; //NOTE: must not swap this line with the line below!
+		st = new int[sz * 4];
 		construct(a, 0, sz - 1, 0);
 	}
 
@@ -66,12 +66,12 @@ int main() {
 	ST* segmentTree = new ST(a, sz);
 
 	cout << segmentTree->query(3, 8) << endl; //12 + 7 + 4 + 8 + 8 + 23 = 62
-	cout << segmentTree->query(4, 8) << endl;
-	cout << segmentTree->query(5, 8) << endl;
+	cout << segmentTree->query(4, 8) << endl; //7 + 4 + 8 + 8 + 23 = 50
+	cout << segmentTree->query(5, 8) << endl; //4 + 8 + 8 + 23 = 43
 
-	segmentTree->update(a, 5, 6); //Increment the fifth element (4) by 6, making it 10.
+	segmentTree->update(a, 5, 6); //Change the fifth element (4) to 6
 
-	cout << segmentTree->query(3, 8) << endl; //12 + 7 + 10 + 8 + 8 + 23 = 66
+	cout << segmentTree->query(3, 8) << endl; //12 + 7 + 6 + 8 + 8 + 23 = 64
 
 	delete segmentTree;
 
