@@ -1,3 +1,3 @@
-ll euclidean(ll n, ll m) {
-	return !m ? n : euclidean(m, n % m);
+int gcd(int n, int m) {
+	return m ? gcd(m, n % m) : n;
 }
