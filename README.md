@@ -1,1 +1,1 @@
-Useful algorithms and data structures for competitive programming
+Useful algorithms and data structures.
