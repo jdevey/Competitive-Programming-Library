@@ -1,7 +1,6 @@
 a.exe
 a.exe.stackdump
 *~
-zin.txt
 in
 CMakeLists.txt
 cmake-build-debug/
