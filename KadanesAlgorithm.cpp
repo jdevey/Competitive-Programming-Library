@@ -1,4 +1,4 @@
-//Returns the sum of the elements of the contiguous subarray with the maximum total sum
+// Returns the sum of the elements of the contiguous subarray with the maximum total sum
 ll kadane(const int* a, int n) {
 	ll grandMax = a[0], currMax = a[0];
 	for (int i = 1; i < n, ++i) {

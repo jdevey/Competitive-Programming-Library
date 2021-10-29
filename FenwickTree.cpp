@@ -18,7 +18,7 @@ int query(int* fTree, int left, int right) {
 	return sum;
 }
 
-//val represents the amount by which the value at 'ind' will increase
+// val represents the amount by which the value at 'ind' will increase
 void update(int* fTree, int sz, int ind, int val) {
 	++ind;
 	while (ind <= sz) {

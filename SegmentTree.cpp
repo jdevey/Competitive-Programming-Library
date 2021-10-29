@@ -2,7 +2,7 @@
 
 using namespace std;
 
-//Organized by sum
+// Organized by sum
 class ST {
 
 	int* st;

@@ -1,6 +1,4 @@
 /*
-In this comment I will explain how the extended euclidean algorithm works.
-
 An inverse mod is the number x such that b*x = 1, when the answer is modded by some number m. This can be rewritten:
 bx + my = 1
 Of course, either x or y will be negative, as the two will be negating one another, in a way.
@@ -75,3 +73,4 @@ ll modInv(ll a) {
     ext(a, BIG, x, y);
     return x < 0 ? x + BIG : x;
 }
+

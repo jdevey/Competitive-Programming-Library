@@ -1,7 +1,7 @@
 /**
  * Returns the value of (base ^ exp) % MD in O(log(exp)) time.
  * 
- * It works by beginning with some arbitrarily large exponent. It first checks to see if the exponent is odd. If so, it must first
+ * Works by beginning with some arbitrarily large exponent. It first checks to see if the exponent is odd. If so, it must first
  * multiply the final answer by the base, allowing use to consider the exponent as even.
  *
  * We then divide the exponent by two and multiply the base by itself, which produces an equivalent answer since

@@ -1,4 +1,4 @@
-//Cycles through every permutation of an array of chars 's'. A cout statement signifies a point where one would want to record a new permutation.
+// Cycles through every permutation of an array of chars 's'. A cout statement signifies a point where one would want to record a new permutation.
 void heap(char* s, int n, int len) {
 	if (n == len) cout << s << endl;
 	for (int i = 0; ; ++i) {
@@ -9,3 +9,4 @@ void heap(char* s, int n, int len) {
 		cout << s << endl;
 	}
 }
+
