@@ -13,9 +13,9 @@ class Primes {
 		vector <int> _primes;
 		constructor() {
 			_sieve = new bool[MAX]();
-			memset(_sieve, 0, sizeof(_sieve));
+			memset(_sieve, 0, sizeof(*_sieve));
 			_smallest_prime_divisor = new int[MAX]();
-			memset(_smallest_prime_divisor, 0, sizeof(_smallest_prime_divisor));
+			memset(_smallest_prime_divisor, 0, sizeof(*_smallest_prime_divisor));
 			for (int i = 2; i * i < MAX; ++i) {
 				for (int j = _sieve[i] ? MAX : i * i; j < MAX; j += i) {
 					_sieve[j] = true;

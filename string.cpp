@@ -1,16 +1,17 @@
-vector <int> separate(string line, char separator = ',') {
-	vector <int> ans;
+vector <string> separate(string line, char separator = ',') {
+	vector <string> ans;
 	string value;
-	for (auto c : line) {
-		if (c == separator) {
-			ans.push_back(stoi(value));
-			value.clear();
+	for (auto it = line.begin(); it != line.end(); ++it) {
+		if (*it == separator || next(it) == line.end()) {
+			if (!*it.empty()) {
+				ans.push_back(string(value.begin() + 1, value.end() - (next(it) != line.end())));
+				value.clear();
+			}
 		}
 		else {
-			value += c;
+			value += *it;
 		}
 	}
-	ans.push_back(stoi(value));
 	return ans;
 }
 

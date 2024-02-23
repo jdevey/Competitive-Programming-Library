@@ -2,17 +2,13 @@
 
 using namespace std;
 
-// Organized by sum
 class ST {
-
-	int* st;
+	ll* st;
 	int sz;
 
 	public:
-
-	ST(int* a, int _sz) {
-		sz = _sz; //NOTE: must not swap this line with the line below!
-		st = new int[sz * 4];
+	ST(int* a, int _sz) : sz(_sz) {
+		st = new ll[sz * 4];
 		construct(a, 0, sz - 1, 0);
 	}
 
@@ -23,28 +19,24 @@ class ST {
 	int queryUtil(int ql, int qr, int l, int r, int ind) {
 		if (l > qr || r < ql) return 0;
 		if (l >= ql && r <= qr) return st[ind];
-		return queryUtil(ql, qr, l, (l + r) / 2, ind * 2 + 1) +
-			queryUtil(ql, qr, (l + r) / 2 + 1, r, ind * 2 + 2);
+		return combine(queryUtil(ql, qr, l, (l + r) / 2, ind * 2 + 1),
+			queryUtil(ql, qr, (l + r) / 2 + 1, r, ind * 2 + 2));
 	}
 
 	int query(int ql, int qr) {
-		queryUtil(ql, qr, 0, sz - 1, 0);
+		return queryUtil(ql, qr, 0, sz - 1, 0);
 	}
 
-	void updateUtil(int node, int diff, int l, int r, int ind) {
+	void updateUtil(int node, int combineValue, int l, int r, int ind) {
 		if (l > node || r < node) return;
-		st[ind] += diff;
+		st[ind] = combine(st[ind], combineValue);
 		if (l == r) return;
-		updateUtil(node, diff, l, (l + r) / 2, ind * 2 + 1);
-		updateUtil(node, diff, (l + r) / 2 + 1, r, ind * 2 + 2);
+		updateUtil(node, combineValue, l, (l + r) / 2, ind * 2 + 1);
+		updateUtil(node, combineValue, (l + r) / 2 + 1, r, ind * 2 + 2);
 	}
 
-	//Change node from current value to value + diff
-	//the array 'a' must be the same array that the segment tree was constructed from
-	void update(int* a, int node, int val) {
-		int diff = val - a[node];
-		a[node] = val;
-		updateUtil(node, diff, 0, sz - 1, 0);
+	void update(int node, int combineValue) {
+		updateUtil(node, combineValue, 0, sz - 1, 0);
 	}
 
 	void construct(int* a, int l, int r, int ind) {
@@ -54,8 +46,12 @@ class ST {
 		}
 		construct(a, l, (l + r) / 2, ind * 2 + 1);
 		construct(a, (l + r) / 2 + 1, r, ind * 2 + 2);
-		st[ind] = st[ind * 2 + 1] + st[ind * 2 + 2];
+		st[ind] = combine(st[ind * 2 + 1], st[ind * 2 + 2]);
 	}
+
+    ll combine(ll a, ll b) {
+        return a + b; // Modify as desired
+    }
 };
 
 int main() {
@@ -69,7 +65,7 @@ int main() {
 	cout << segmentTree->query(4, 8) << endl; //7 + 4 + 8 + 8 + 23 = 50
 	cout << segmentTree->query(5, 8) << endl; //4 + 8 + 8 + 23 = 43
 
-	segmentTree->update(a, 5, 6); //Change the fifth element (4) to 6
+	segmentTree->update(a, 5, 2); //Change the fifth element (4) to 6
 
 	cout << segmentTree->query(3, 8) << endl; //12 + 7 + 6 + 8 + 8 + 23 = 64
 
