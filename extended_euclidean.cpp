@@ -12,7 +12,7 @@ To proceed, we first use the euclidean algorithm to produce a chain of mod resul
 However, since this is the extended euclidean algorithm, we're not done yet.
 
 We then proceed by taking the equation bx + ay = 1, and proceeding to rewrite 1 with larger and larger terms, until we arrive at an answer that is
-in terms of a and b. Here's an example: 19887, 6655. (The numbers must be coprime.)
+in terms of a and b. Here's an example: 19887, 8854. (The numbers must be coprime.)
 
 First, we create the chain of modulo results:
 19887 % 8854 = 2179

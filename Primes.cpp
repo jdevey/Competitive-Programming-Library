@@ -7,7 +7,7 @@ class Primes {
 	friend class constructor;
 	class constructor {
 		public:
-		const int MAX = 2e7;
+		const int MAX = 1e6;
 		bool* _sieve;
 		int* _smallest_prime_divisor;
 		vector <int> _primes;
@@ -17,14 +17,17 @@ class Primes {
 			_smallest_prime_divisor = new int[MAX]();
 			memset(_smallest_prime_divisor, 0, sizeof(*_smallest_prime_divisor));
 			for (int i = 2; i * i < MAX; ++i) {
-				for (int j = _sieve[i] ? MAX : i * i; j < MAX; j += i) {
-					_sieve[j] = true;
-					_smallest_prime_divisor[j] = _smallest_prime_divisor[j] ? _smallest_prime_divisor[j] : i;
-				}
+                if (!_sieve[i]) {
+                    for (int j = i * i; j < MAX; j += i) {
+				        _sieve[j] = true;
+					    _smallest_prime_divisor[j] = _smallest_prime_divisor[j] ? _smallest_prime_divisor[j] : i;
+				    }
+                }
 			}
 			for (int i = 2; i < MAX; ++i) {
 				if (!_sieve[i]) {
 					_primes.push_back(i);
+                    _smallest_prime_divisor[i] = i;
 				}
 			}
 		}
@@ -40,7 +43,6 @@ class Primes {
 			++prime_factors[p._smallest_prime_divisor[n]];
 			n /= p._smallest_prime_divisor[n];
 		}
-		++prime_factors[n];
 		return prime_factors;
 	}
 	static vector <int> factors(int n) {
@@ -54,6 +56,18 @@ class Primes {
 		sort(factors.begin(), factors.end());
 		return factors;
 	}
+    static bool isPrime(int n) {
+        if (n < p.MAX) {
+            return !p._sieve[n];
+        }
+        int sq = sqrt(n);
+        for (int i = 0; p._primes[i] <= sq; ++i) {
+            if (n % p._primes[i] == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 };
 
 int main() {
